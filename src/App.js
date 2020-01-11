@@ -11,9 +11,13 @@ class App extends Component {
     state = {
         contacts: []
     };
-
+	
     componentDidMount() {
-        fetch('http://jsonplaceholder.typicode.com/users')
+		
+		const stage = process.env.REACT_APP_QUOTES_API_STAGE;
+		const host = process.env.REACT_APP_QUOTES_API_HOST;
+		//console.log(host+'/'+stage);
+		fetch(`https://${host}/${stage}`)
             .then(res => res.json())
             .then((data) => {
                 this.setState({ contacts: data })
